@@ -1,26 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:tugaskelompok4/screens/dataecommerece.dart';
 import 'package:tugaskelompok4/screens/detailpage.dart';
-import 'package:url_launcher/url_launcher.dart';
 
-class ListEcommerce extends StatelessWidget {
-  const ListEcommerce({Key? key}) : super(key: key);
+class FavoritePage extends StatelessWidget {
+  const FavoritePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final favoritesite =
+        ecommerceSites.where((site) => site.isFavorite).toList();
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('Daftar Situs Ecommerce'),
+        title: Text('Daftar Situs Favorite'),
       ),
       body: GridView.builder(
-        itemCount: ecommerceSites.length,
+        itemCount: favoritesite.length,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           mainAxisSpacing: 16.0,
           crossAxisSpacing: 16.0,
         ),
-        itemBuilder: (BuildContext context, int index) {
-          final site = ecommerceSites[index];
+        itemBuilder: (context, index) {
+          final EcommerceSite site = favoritesite[index];
           return Card(
             child: InkWell(
               onTap: () {
